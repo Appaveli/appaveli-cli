@@ -1,0 +1,12 @@
+package {{PACKAGE}};
+
+import java.util.List;
+import tech.appavelitech.domain.{{ENTITY}};
+
+public interface {{ENTITY}}Dao {
+    void save({{ENTITY}} entity);
+    {{ENTITY}} findById(int id);
+    List<{{ENTITY}}> findAll();
+    void update({{ENTITY}} entity);
+    void delete(int id);
+}

@@ -1,0 +1,34 @@
+package {{PACKAGE}};
+
+import java.util.*;
+import tech.appavelitech.domain.{{ENTITY}};
+
+public class {{ENTITY}}DaoImpl implements {{ENTITY}}Dao {
+
+    @Override
+    public void save({{ENTITY}} entity) {
+        // TODO: Implement
+    }
+
+    @Override
+    public {{ENTITY}} findById(int id) {
+        // TODO: Implement
+        return null;
+    }
+
+    @Override
+    public List<{{ENTITY}}> findAll() {
+        // TODO: Implement
+        return new ArrayList<>();
+    }
+
+    @Override
+    public void update({{ENTITY}} entity) {
+        // TODO: Implement
+    }
+
+    @Override
+    public void delete(int id) {
+        // TODO: Implement
+    }
+}
