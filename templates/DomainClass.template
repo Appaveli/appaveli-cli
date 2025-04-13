@@ -1,0 +1,13 @@
+package {{PACKAGE}};
+
+public class {{ENTITY}} {
+    {{FIELDS}}
+
+    {{GETTERS_SETTERS}}
+
+    @Override
+    public String toString() {
+        return "{{ENTITY}}{" +
+               {{TO_STRING_CONTENT}} + '}';
+    }
+}
