@@ -10,6 +10,7 @@ Built with developers in mind, it accelerates backend development by generating 
 
 - ✅ Generate DAO interfaces and implementations (JDBC-style)
 - ✅ Generate domain classes with fields, getters/setters, and `toString()`
+- ✅ Generate DatabaseConnection and JDBC utility class
 - ✅ Template-based code generation
 - ✅ Framework-agnostic (use it in any Java project)
 - ✅ Easy to use and customize
@@ -32,6 +33,17 @@ cd appaveli-cli
 mvn clean install
 ```
 ## 📦 CLI Usage
+
+### 🔹 Generate JDBC Utility
+
+```bash
+java -jar target/appaveli-cli-jar-with-dependencies.jar generate-jdbc --package com.example.dao
+
+```
+Creates:
+* 	DatabaseConnection.java
+---
+
 
 ### 🔹 Generate DAO
 

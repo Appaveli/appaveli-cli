@@ -28,7 +28,7 @@ public class TemplateEngine {
 
     public static String render(String templatePath, String entity, String basePackage, Map<String, String> extraPlaceholders) {
         try {
-            String template = Files.readString(Path.of(templatePath));
+            String template = Files.readString(Path.of(templatePath)).trim();
 
             template = template
                     .replace("{{PACKAGE}}", basePackage)
@@ -36,11 +36,31 @@ public class TemplateEngine {
                     .replace("{{ENTITY_LOWER}}", Character.toLowerCase(entity.charAt(0)) + entity.substring(1));
 
             if (extraPlaceholders != null) {
-                for (Map.Entry<String, String> entry : extraPlaceholders.entrySet()) {
-                    template = template.replace(entry.getKey(), entry.getValue());
-                }
+                template = handlePlaceholders(extraPlaceholders, template);
             }
 
+            return template;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private static String handlePlaceholders(Map<String, String> extraPlaceholders, String template) {
+        for (Map.Entry<String, String> entry : extraPlaceholders.entrySet()) {
+            String key = entry.getKey().trim();
+            if (!key.startsWith("{{")) key = "{{" + key;
+            if (!key.endsWith("}}")) key = key + "}}";
+            template = template.replace(key, entry.getValue().trim());
+        }
+        return template;
+    }
+
+    public static String render(String templatePath, Map<String, String> placeholders) {
+        try {
+            String template = Files.readString(Path.of(templatePath)).trim();
+            template = handlePlaceholders(placeholders, template);
             return template;
 
         } catch (IOException e) {
