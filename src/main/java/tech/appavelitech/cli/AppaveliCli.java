@@ -42,6 +42,10 @@ public class AppaveliCli {
                 handleGenerateJdbc(args, config);
                 break;
 
+            case "generate-service":
+                handleGenerateService(args);
+                break;
+
             default:
                 System.out.println("Unknown command: " + command);
                 printUsage();
@@ -71,7 +75,29 @@ public class AppaveliCli {
 
         DaoGenerator.generate(entity, basePackage);
     }
+    private static void handleGenerateService(String[] args) {
+        String service = null;
+        String basePackage = null;
 
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--service":
+                    if (i + 1 < args.length) service = args[++i];
+                    break;
+                case "--package":
+                    if (i + 1 < args.length) basePackage = args[++i];
+                    break;
+            }
+        }
+
+        if (service == null || basePackage == null) {
+            System.out.println("Missing required parameters for generate-service.");
+            printUsage();
+            return;
+        }
+
+        ServiceGenerator.generate(service, basePackage);
+    }
     private static void handleGenerateDomain(String[] args) {
         String entity = null;
         String basePackage = null;
@@ -140,6 +166,7 @@ public class AppaveliCli {
     private static void printUsage() {
         System.out.println("\nUsage:");
         System.out.println("  generate-dao --entity EntityName --package your.package.name");
+        System.out.println("  generate-service --service ServiceName --package your.package.name");
         System.out.println("  generate-domain --entity EntityName --package your.package.name --fields \"name:String,email:String\"");
         System.out.println("  generate-jdbc --package your.package.name [--db-name db] [--db-user user] [--db-password pass]");
         System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");

@@ -1,0 +1,13 @@
+package {{PACKAGE}};
+
+import javax.ws.rs.core.Response;
+import java.util.List;
+import {{DOMAIN_IMPORT}};
+
+public interface {{ENTITY}}Service {
+    Response getAll();
+    Response getById{{ENTITY}} {{ENTITY_LOWER}});
+    Response save({{ENTITY}} {{ENTITY_LOWER}});
+    Response update({{ENTITY}} {{ENTITY_LOWER}});
+    Response delete({{ENTITY}} {{ENTITY_LOWER}});
+}
