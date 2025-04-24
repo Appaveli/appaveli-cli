@@ -44,7 +44,24 @@ Creates:
 * 	DatabaseConnection.java
 ---
 
+### 🔹 Generate SQL
 
+```bash
+java -jar target/appaveli-cli-jar-with-dependencies.jar generate-sql --entity User --fields "id:int,username:String,email:String"
+
+```
+Creates:
+* 	User.sql
+```bash
+CREATE TABLE user (
+    id INT PRIMARY KEY,
+    username VARCHAR(255),
+    email VARCHAR(255)
+);
+
+```
+
+---
 ### 🔹 Generate DAO
 
 ```bash
