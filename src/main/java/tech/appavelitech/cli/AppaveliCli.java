@@ -45,6 +45,9 @@ public class AppaveliCli {
             case "generate-service":
                 handleGenerateService(args);
                 break;
+            case "generate-sql":
+                handleGenerateSql(args);
+                break;
 
             default:
                 System.out.println("Unknown command: " + command);
@@ -125,7 +128,29 @@ public class AppaveliCli {
 
         DomainGenerator.generate(entity, basePackage, fields);
     }
+    private static void handleGenerateSql(String[] args) {
+        String entity = null;
+        String fields = null;
 
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity":
+                    entity = args[++i];
+                    break;
+                case "--fields":
+                    fields = args[++i];
+                    break;
+            }
+        }
+
+        if (entity == null || fields == null) {
+            System.out.println("Missing required parameters for generate-sql.");
+            printUsage();
+            return;
+        }
+
+        SqlGenerator.generate(entity, fields);
+    }
     private static void handleGenerateJdbc(String[] args, Properties config) {
         String basePackage = null;
         String dbName = config.getProperty("db.name", "your_database");
@@ -169,6 +194,7 @@ public class AppaveliCli {
         System.out.println("  generate-service --service ServiceName --package your.package.name");
         System.out.println("  generate-domain --entity EntityName --package your.package.name --fields \"name:String,email:String\"");
         System.out.println("  generate-jdbc --package your.package.name [--db-name db] [--db-user user] [--db-password pass]");
+        System.out.println("  generate-sql --entity EntityName --fields \"id:int,name:String,email:String\"");
         System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
     }
 }
