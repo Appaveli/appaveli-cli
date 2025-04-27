@@ -48,7 +48,12 @@ public class AppaveliCli {
             case "generate-sql":
                 handleGenerateSql(args);
                 break;
-
+            case "generate-servlet":
+                handleGenerateServlet(args);
+                break;
+            case "generate-jsp":
+                handleGenerateJsp(args);
+                break;
             default:
                 System.out.println("Unknown command: " + command);
                 printUsage();
@@ -151,6 +156,52 @@ public class AppaveliCli {
 
         SqlGenerator.generate(entity, fields);
     }
+    private static void handleGenerateServlet(String[] args) {
+        String entity = null;
+        String basePackage = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity":
+                    entity = args[++i];
+                    break;
+                case "--package":
+                    basePackage = args[++i];
+                    break;
+            }
+        }
+
+        if (entity == null || basePackage == null) {
+            System.out.println("Missing required parameters for generate-servlet.");
+            printUsage();
+            return;
+        }
+
+        ServletGenerator.generate(entity, basePackage);
+    }
+    private static void handleGenerateJsp(String[] args) {
+        String entity = null;
+        String views = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity":
+                    entity = args[++i];
+                    break;
+                case "--views":
+                    views = args[++i];
+                    break;
+            }
+        }
+
+        if (entity == null || views == null) {
+            System.out.println("Missing required parameters for generate-jsp.");
+            printUsage();
+            return;
+        }
+
+        JspGenerator.generate(entity, views);
+    }
     private static void handleGenerateJdbc(String[] args, Properties config) {
         String basePackage = null;
         String dbName = config.getProperty("db.name", "your_database");
@@ -195,6 +246,8 @@ public class AppaveliCli {
         System.out.println("  generate-domain --entity EntityName --package your.package.name --fields \"name:String,email:String\"");
         System.out.println("  generate-jdbc --package your.package.name [--db-name db] [--db-user user] [--db-password pass]");
         System.out.println("  generate-sql --entity EntityName --fields \"id:int,name:String,email:String\"");
+        System.out.println("  generate-servlet --entity EntityName --package your.package.name");
+        System.out.println("  generate-jsp --entity EntityName --views list,form,detail,edit,search");
         System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
     }
 }

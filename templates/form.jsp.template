@@ -1,0 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>{{ENTITY}} Form</title>
+</head>
+<body>
+<h2>{{ENTITY}} Form</h2>
+<form method="post" action="/{{ENTITY_LOWER}}/save">
+    <label for="example">Example Field:</label>
+    <input type="text" name="exampleField" id="example"/>
+    <input type="submit" value="Save"/>
+</form>
+</body>
+</html>
