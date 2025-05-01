@@ -1,0 +1,17 @@
+package {{PACKAGE}};
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import java.io.IOException;
+import {{UTIL_IMPORT}}.SessionUtils;
+
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SessionUtils.logout(req.getSession());
+        resp.sendRedirect("login.jsp");
+    }
+}

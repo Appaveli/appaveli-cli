@@ -1,0 +1,32 @@
+package {{PACKAGE}};
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import java.io.IOException;
+import {{DAO_IMPORT}};
+import {{DAO_IMPL_IMPORT}};
+import {{DOMAIN_IMPORT}};
+import {{UTIL_IMPORT}}.PasswordUtils;
+import {{UTIL_IMPORT}}.SessionUtils;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+
+    private {{ENTITY}}Dao userDao = new {{ENTITY}}DaoImpl();
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+
+        {{ENTITY}} user = userDao.findByUsername(username); // Assume DAO returns user by username
+        if (user != null && PasswordUtils.verify(password, user.getPassword())) {
+            HttpSession session = req.getSession();
+            SessionUtils.setLoggedInUser(session, user);
+            resp.sendRedirect("dashboard.jsp");
+        } else {
+            resp.sendRedirect("login.jsp?error=1");
+        }
+    }
+}
