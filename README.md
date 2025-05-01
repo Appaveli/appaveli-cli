@@ -74,7 +74,7 @@ generate-auth-servlet --entity User --package com.package.auth --dao-package com
 ### Project Bootstrapping
 
 ```bash
-init-project --name MyApp --package com.package
+java -jar target/appaveli-cli.jar init-project --name MyApp --package com.package
 ```
 
 ---
@@ -82,7 +82,7 @@ init-project --name MyApp --package com.package
 ### 🔹 Generate JDBC Utility
 
 ```bash
-generate-jdbc --package com.example.dao
+java -jar target/appaveli-cli.jar generate-jdbc --package com.example.dao
 ```
 
 Creates:
@@ -93,7 +93,7 @@ Creates:
 ### 🔹 Generate SQL
 
 ```bash
-generate-sql --entity User --fields "id:int,username:String,email:String"
+java -jar target/appaveli-cli.jar generate-sql --entity User --fields "id:int,username:String,email:String"
 ```
 
 Creates:
@@ -112,7 +112,7 @@ CREATE TABLE user (
 ### 🔹 Generate DAO
 
 ```bash
-generate-dao --entity User --package com.example.dao
+java -jar target/appaveli-cli.jar generate-dao --entity User --package com.example.dao
 ```
 
 Creates:
@@ -124,7 +124,7 @@ Creates:
 ### 🔹 Generate Domain Class
 
 ```bash
-generate-domain --entity User --package com.example.domain --fields "id:int,username:String,email:String,active:boolean"
+java -jar target/appaveli-cli.jar generate-domain --entity User --package com.example.domain --fields "id:int,username:String,email:String,active:boolean"
 ```
 
 Creates:
@@ -137,7 +137,7 @@ Creates:
 Move or symlink the JAR:
 
 ```bash
-cp target/appaveli-cli-jar-with-dependencies.jar ~/.local/bin/appaveli-cli.jar
+cp target/appaveli-cli.jar ~/.local/bin/appaveli-cli.jar
 ```
 
 Create a wrapper script or alias:
