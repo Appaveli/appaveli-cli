@@ -54,6 +54,9 @@ public class AppaveliCli {
             case "generate-jsp":
                 handleGenerateJsp(args);
                 break;
+            case "init-project":
+                handleInitProject(args);
+                break;
             default:
                 System.out.println("Unknown command: " + command);
                 printUsage();
@@ -82,6 +85,28 @@ public class AppaveliCli {
         }
 
         DaoGenerator.generate(entity, basePackage);
+    }
+    private static void handleInitProject(String[] args) {
+        String name = null;
+        String basePackage = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--name":
+                    name = args[++i];
+                    break;
+                case "--package":
+                    basePackage = args[++i];
+                    break;
+            }
+        }
+
+        if (name == null || basePackage == null) {
+            System.out.println("Missing --name or --package");
+            return;
+        }
+
+        InitProjectGenerator.generate(name, basePackage);
     }
     private static void handleGenerateService(String[] args) {
         String service = null;
@@ -248,6 +273,7 @@ public class AppaveliCli {
         System.out.println("  generate-sql --entity EntityName --fields \"id:int,name:String,email:String\"");
         System.out.println("  generate-servlet --entity EntityName --package your.package.name");
         System.out.println("  generate-jsp --entity EntityName --views list,form,detail,edit,search");
+        System.out.println("  generate-jsp init-project --name ProjectName --package your.package.name");
         System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
     }
 }

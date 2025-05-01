@@ -1,0 +1,12 @@
+# {{PROJECT_NAME}}
+
+This project was scaffolded using **appaveli-cli**.
+
+## Structure
+
+- `domain/` — Java POJOs
+- `dao/` — DAO interfaces and implementations
+- `service/` — JAX-RS or servlet-based services
+- `views/` — JSP files
+- `web/` — static assets (CSS/JS)
+- `Main.java` — optional embedded Jetty/Tomcat runner
