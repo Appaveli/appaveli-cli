@@ -57,12 +57,82 @@ public class AppaveliCli {
             case "init-project":
                 handleInitProject(args);
                 break;
+            case "generate-auth":
+                handleGenerateAuth(args);
+                break;
+            case "generate-auth-utils":
+                handleGenerateAuthUtils(args);
+                break;
+            case "generate-auth-servlet":
+                handleGenerateAuthServlet(args);
+                break;
             default:
                 System.out.println("Unknown command: " + command);
                 printUsage();
         }
     }
+    private static void handleGenerateAuth(String[] args) {
+        String entity = null, basePackage = null, daoPackage = null, domainPackage = null;
 
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity": entity = args[++i]; break;
+                case "--package": basePackage = args[++i]; break;
+                case "--dao-package": daoPackage = args[++i]; break;
+                case "--domain-package": domainPackage = args[++i]; break;
+            }
+        }
+
+        if (entity == null || basePackage == null || daoPackage == null || domainPackage == null) {
+            System.out.println("Missing required parameters for generate-auth.");
+            return;
+        }
+
+        AuthGenerator.generate(entity, basePackage, daoPackage, domainPackage);
+    }
+    private static void handleGenerateAuthServlet(String[] args) {
+        String entity = null;
+        String servletPackage = null;
+        String daoPackage = null;
+        String domainPackage = null;
+        String utilPackage = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity": entity = args[++i]; break;
+                case "--package": servletPackage = args[++i]; break;
+                case "--dao-package": daoPackage = args[++i]; break;
+                case "--domain-package": domainPackage = args[++i]; break;
+                case "--util-package": utilPackage = args[++i]; break;
+            }
+        }
+
+        if (entity == null || servletPackage == null || daoPackage == null || domainPackage == null || utilPackage == null) {
+            System.out.println("Missing required parameters for generate-auth-servlet.");
+            System.out.println("Usage: generate-auth-servlet --entity User --package com.example.auth --dao-package com.example.dao --domain-package com.example.domain --util-package com.example.util");
+            return;
+        }
+
+        AuthServletGenerator.generate(entity, servletPackage, daoPackage, domainPackage, utilPackage);
+    }
+    private static void handleGenerateAuthUtils(String[] args) {
+        String entity = null, utilPackage = null, domainPackage = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity": entity = args[++i]; break;
+                case "--package": utilPackage = args[++i]; break;
+                case "--domain-package": domainPackage = args[++i]; break;
+            }
+        }
+
+        if (entity == null || utilPackage == null || domainPackage == null) {
+            System.out.println("Missing required parameters for generate-auth-utils.");
+            return;
+        }
+
+        AuthUtilsGenerator.generate(entity, utilPackage, domainPackage);
+    }
     private static void handleGenerateDao(String[] args) {
         String entity = null;
         String basePackage = null;
@@ -274,6 +344,7 @@ public class AppaveliCli {
         System.out.println("  generate-servlet --entity EntityName --package your.package.name");
         System.out.println("  generate-jsp --entity EntityName --views list,form,detail,edit,search");
         System.out.println("  generate-jsp init-project --name ProjectName --package your.package.name");
+        System.out.println("  generate-auth-servlet --entity EntityName --package com.package.name --dao-package com.dao --domain-package com.domain --util-package com.util");
         System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
     }
 }

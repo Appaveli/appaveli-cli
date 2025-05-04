@@ -5,6 +5,7 @@
 # Build output
 target/
 build/
+generated/
 
 # Compiled class files
 *.class
