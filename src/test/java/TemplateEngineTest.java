@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 import org.junit.jupiter.api.Test;
-import tech.appavelitech.cli.TemplateEngine;
+import io.github.appaveli.cli.TemplateEngine;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,9 +1,8 @@
-package tech.appavelitech.cli;
+package io.github.appaveli.cli;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class JspGenerator {
 

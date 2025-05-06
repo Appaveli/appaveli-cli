@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 import org.junit.jupiter.api.Test;
-import tech.appavelitech.cli.DomainGenerator;
+import io.github.appaveli.cli.DomainGenerator;
 
 import java.io.File;
 import java.nio.file.Files;

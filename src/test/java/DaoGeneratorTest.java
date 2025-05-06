@@ -15,7 +15,7 @@
  */
 
 import org.junit.jupiter.api.Test;
-import tech.appavelitech.cli.DaoGenerator;
+import io.github.appaveli.cli.DaoGenerator;
 
 import java.io.File;
 import java.nio.file.Files;

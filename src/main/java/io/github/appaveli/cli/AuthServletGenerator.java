@@ -1,4 +1,4 @@
-package tech.appavelitech.cli;
+package io.github.appaveli.cli;
 
 import java.io.*;
 import java.nio.file.*;

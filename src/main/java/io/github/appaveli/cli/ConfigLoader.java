@@ -14,7 +14,7 @@
  * copies or substantial portions of the Software.
  */
 
-package tech.appavelitech.cli;
+package io.github.appaveli.cli;
 
 import java.io.FileInputStream;
 import java.io.IOException;
