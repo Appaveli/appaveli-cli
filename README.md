@@ -1,5 +1,7 @@
 # appaveli-cli
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.appaveli/appaveli-cli.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.appaveli/appaveli-cli)
+
 **appaveli-cli** is a lightweight Java-based code generation tool that helps you scaffold DAO interfaces, DAO implementations, domain model classes, servlets, authentication, and entire project skeletons using simple CLI commands.
 
 Built with developers in mind, it accelerates backend development by generating boilerplate code based on customizable templates — without requiring frameworks.
