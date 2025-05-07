@@ -15,32 +15,53 @@
  */
 package io.github.appaveli.cli;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TemplateEngine {
 
-    public static String render(String templatePath, String entity, String basePackage) {
-        return render(templatePath, entity, basePackage, null);
+    public static String render(String resourcePath, String entity, String basePackage) {
+        return render(resourcePath, entity, basePackage, null);
     }
 
-    public static String render(String templatePath, String entity, String basePackage, Map<String, String> extraPlaceholders) {
-        try {
-            String template = Files.readString(Path.of(templatePath)).trim();
+    public static String render(String resourcePath, String entity, String basePackage, Map<String, String> extraPlaceholders) {
+        String template = readTemplateFromResources(resourcePath);
+        if (template.isEmpty()) return "";
 
-            template = template
-                    .replace("{{PACKAGE}}", basePackage)
-                    .replace("{{ENTITY}}", entity)
-                    .replace("{{ENTITY_LOWER}}", Character.toLowerCase(entity.charAt(0)) + entity.substring(1));
+        template = template
+                .replace("{{PACKAGE}}", basePackage)
+                .replace("{{ENTITY}}", entity)
+                .replace("{{ENTITY_LOWER}}", Character.toLowerCase(entity.charAt(0)) + entity.substring(1));
 
-            if (extraPlaceholders != null) {
-                template = handlePlaceholders(extraPlaceholders, template);
+        if (extraPlaceholders != null) {
+            template = handlePlaceholders(extraPlaceholders, template);
+        }
+
+        return template;
+    }
+
+    public static String render(String resourcePath, Map<String, String> placeholders) {
+        String template = readTemplateFromResources(resourcePath);
+        if (template.isEmpty()) return "";
+
+        return handlePlaceholders(placeholders, template);
+    }
+
+    private static String readTemplateFromResources(String resourcePath) {
+        try (InputStream in = TemplateEngine.class.getClassLoader().getResourceAsStream(resourcePath)) {
+            if (in == null) {
+                System.err.println("Template not found: " + resourcePath);
+                return "";
             }
 
-            return template;
-
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                return reader.lines().collect(Collectors.joining("\n"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return "";
@@ -55,17 +76,5 @@ public class TemplateEngine {
             template = template.replace(key, entry.getValue().trim());
         }
         return template;
-    }
-
-    public static String render(String templatePath, Map<String, String> placeholders) {
-        try {
-            String template = Files.readString(Path.of(templatePath)).trim();
-            template = handlePlaceholders(placeholders, template);
-            return template;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 }

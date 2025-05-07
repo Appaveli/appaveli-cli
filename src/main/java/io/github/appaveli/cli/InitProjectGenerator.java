@@ -14,7 +14,7 @@ public class InitProjectGenerator {
 
     public static void generate(String projectName, String basePackage) {
         String outputDir = "generated/" + projectName;
-        String resourceBase = "templates/init-project";
+        String resourceBase = "templates";
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("PROJECT_NAME", projectName);
