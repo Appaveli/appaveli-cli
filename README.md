@@ -40,7 +40,7 @@ java -version
 The easiest way to use **Appaveli CLI** without cloning the repo is by running it directly via shell script. This script will download the JAR from Maven Central and execute the CLI.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/appavelitech/appaveli-cli/main/appaveli-cli.sh -o appaveli-cli.sh
+curl -sSL https://raw.githubusercontent.com/Appaveli/appaveli-cli/main/appaveli-cli.sh -o appaveli-cli.sh
 chmod +x appaveli-cli.sh
 ./appaveli-cli.sh generate-dao --entity User --package com.example.dao
 ```
