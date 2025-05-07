@@ -3,7 +3,7 @@
 # === Config ===
 GROUP_ID="io.github.appaveli"
 ARTIFACT_ID="appaveli-cli"
-VERSION="1.7.1"
+VERSION="1.7.2"
 
 # Convert group ID to path
 GROUP_PATH="${GROUP_ID//.//}"
