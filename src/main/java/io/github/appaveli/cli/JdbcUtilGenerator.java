@@ -23,7 +23,7 @@ import java.util.Map;
 public class JdbcUtilGenerator {
     public static void generate(String basePackage, String dbName, String dbUser, String dbPassword) {
         String content = TemplateEngine.render(
-                "templates/jdbcutils.template",
+                "templates/JdbcUtils.template",
                 Map.of(
                         "PACKAGE", basePackage,
                         "DB_NAME", dbName,
