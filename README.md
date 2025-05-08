@@ -142,28 +142,43 @@ Creates:
 
 ---
 
-## 🌐 Optional: Global CLI Access
+---
 
-Move or symlink the JAR:
+## 🌐 Optional: Global CLI Installation (Recommended)
 
-```bash
-cp target/appaveli-cli.jar ~/.local/bin/appaveli-cli.jar
-```
+To run `appaveli-cli` globally from anywhere in your terminal, use the provided `install.sh` script.
 
-Create a wrapper script or alias:
-
-```bash
-echo 'alias appaveli-cli="java -jar ~/.local/bin/appaveli-cli.jar"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-Now you can run:
-
-```bash
-appaveli-cli generate-dao --entity Foo --package tech.example.dao
-```
+This will:
+- Detect the correct fat JAR (`appaveli-cli-<version>-jar-with-dependencies.jar`)
+- Copy it to `~/.local/lib/appaveli-cli`
+- Generate a launcher script
+- Create a global symlink in `~/.local/bin`
+- Add `~/.local/bin` to your shell `PATH` if missing
 
 ---
+
+### ✅ Step 1: Build the CLI
+
+```bash
+git clone https://github.com/appavelitech/appaveli-cli.git
+cd appaveli-cli
+mvn clean package
+```
+### ✅ Step 2: Run the Installer
+```bash
+chmod +x install.sh
+./install.sh
+```
+### ✅ Step 3: Use It Globally
+```bash
+appaveli-cli --help
+```
+
+If appaveli-cli still shows “command not found”, restart your terminal or run:
+
+```bash
+source ~/.zshrc   # or ~/.bashrc```
+```
 
 ## 📁 Templates
 
