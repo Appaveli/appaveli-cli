@@ -66,6 +66,9 @@ public class AppaveliCli {
             case "generate-auth-servlet":
                 handleGenerateAuthServlet(args);
                 break;
+            case "generate-crud-module":
+                handleGenerateCrudModule(args);
+                break;
             default:
                 System.out.println("Unknown command: " + command);
                 printUsage();
@@ -114,6 +117,27 @@ public class AppaveliCli {
         }
 
         AuthServletGenerator.generate(entity, servletPackage, daoPackage, domainPackage, utilPackage);
+    }
+    private static void handleGenerateCrudModule(String[] args) {
+        String entity = null;
+        String basePackage = null;
+        String fields = null;
+
+        for (int i = 1; i < args.length; i++) {
+            switch (args[i]) {
+                case "--entity": entity = args[++i]; break;
+                case "--package": basePackage = args[++i]; break;
+                case "--fields": fields = args[++i]; break;
+            }
+        }
+
+        if (entity == null || basePackage == null || fields == null) {
+            System.out.println("Missing required parameters for generate-crud-module.");
+            System.out.println("Usage: generate-crud-module --entity Product --package com.example --fields \"id:int,name:String\"");
+            return;
+        }
+
+        CrudModuleGenerator.generate(entity, basePackage, fields);
     }
     private static void handleGenerateAuthUtils(String[] args) {
         String entity = null, utilPackage = null, domainPackage = null;
@@ -345,6 +369,6 @@ public class AppaveliCli {
         System.out.println("  generate-jsp --entity EntityName --views list,form,detail,edit,search");
         System.out.println("  generate-jsp init-project --name ProjectName --package your.package.name");
         System.out.println("  generate-auth-servlet --entity EntityName --package com.package.name --dao-package com.dao --domain-package com.domain --util-package com.util");
-        System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
+        System.out.println("  generate-crud-module --entity EntityName --package your.package.name --fields \"id:int,name:String\"");        System.out.println("\nOptional: define defaults in .appaveli-config.properties\n");
     }
 }
