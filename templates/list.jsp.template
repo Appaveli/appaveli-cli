@@ -1,0 +1,21 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>{{ENTITY}} List</title>
+</head>
+<body>
+<h2>{{ENTITY}} List</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Example Field</th>
+    </tr>
+    <%-- for ({{ENTITY}} e : (List<{{ENTITY}}>) request.getAttribute("items")) { --%>
+    <tr>
+        <td><%= e.getId() %></td>
+        <td><%= e.getSomeField() %></td>
+    </tr>
+    <%-- } --%>
+</table>
+</body>
+</html>

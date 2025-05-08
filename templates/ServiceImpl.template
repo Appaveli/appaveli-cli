@@ -1,0 +1,53 @@
+package {{PACKAGE}};
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import com.sun.jersey.api.core.InjectParam;
+import {{DAO_IMPORT}};
+import {{DAO_IMPL_IMPORT}};
+import {{DOMAIN_IMPORT}};
+import {{UTIL_IMPORT}};
+
+@Path("/{{ENTITY_LOWER}}service")
+public class {{ENTITY}}ServiceImpl implements {{ENTITY}}Service {
+
+    {{ENTITY}}Dao {{ENTITY_LOWER}}Dao = new {{ENTITY}}DaoImpl();
+
+    @Path("/{{ENTITY_LOWER}}")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Override
+    public Response getAllData() {
+        return null;
+    }
+
+    @Path("/{{ENTITY_LOWER}}")
+    @GET
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Override
+    public Response getById(@InjectParam {{ENTITY}} {{ENTITY_LOWER}}) {
+        return null;
+    }
+
+    @Path("/{{ENTITY_LOWER}}")
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Override
+    public Response save(@InjectParam {{ENTITY}} {{ENTITY_LOWER}}) {
+        return null;
+    }
+
+    @Override
+    public Response update({{ENTITY}} {{ENTITY_LOWER}}) {
+        return null;
+    }
+
+    @Override
+    public Response delete({{ENTITY}} {{ENTITY_LOWER}}) {
+        return null;
+    }
+}
