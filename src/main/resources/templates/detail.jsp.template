@@ -1,0 +1,11 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>{{ENTITY}} Detail</title>
+</head>
+<body>
+<h2>{{ENTITY}} Details</h2>
+<p>ID: <%= request.getAttribute("id") %></p>
+<p>Example Field: <%= request.getAttribute("exampleField") %></p>
+</body>
+</html>
